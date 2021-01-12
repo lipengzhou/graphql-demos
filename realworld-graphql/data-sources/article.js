@@ -7,8 +7,8 @@ class Articles extends MongoDataSource {
     return article.save()
   }
 
-  getArticles () {
-    return this.model.find()
+  getArticles (options) {
+    return this.model.find().skip(options.offset).limit(options.limit)
   }
 
   getCount () {

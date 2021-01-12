@@ -1,14 +1,18 @@
 module.exports = {
   Query: {
-    async articles (parent, {}, { dataSources }) {
-      const [ articles, articlesCount ] = await Promise.all([
-        dataSources.articles.getArticles(),
-        dataSources.articles.getCount()
-      ])
-      return {
-        articles,
-        articlesCount
-      }
+    async articles (parent, { offset, limit }, { dataSources }) {
+      return {}
+      // const [ articles, articlesCount ] = await Promise.all([
+      //   dataSources.articles.getArticles({
+      //     offset,
+      //     limit
+      //   }),
+      //   dataSources.articles.getCount()
+      // ])
+      // return {
+      //   articles,
+      //   articlesCount
+      // }
     }
   },
   Mutation: {
@@ -26,6 +30,19 @@ module.exports = {
     async author (parent, args, { dataSources }) {
       const user = await dataSources.users.findById(parent.author)
       return user
+    }
+  },
+  ArticlesPayload: {
+    async articles (parent, { offset, limit }, { dataSources }) {
+      const articles = await dataSources.articles.getArticles({
+        offset,
+        limit
+      })
+      return articles
+    },
+    async articlesCount (parent, args, { dataSources }) {
+      const count = await dataSources.articles.getCount()
+      return count
     }
   }
 }

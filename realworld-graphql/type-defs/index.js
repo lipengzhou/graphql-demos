@@ -27,7 +27,7 @@ const typeDefs = gql`
     # foo: String @upper
     foo: String @auth @upper
     currentUser: User @auth
-    articles: ArticlesPayload
+    articles(offset: Int = 0, limit: Int = 2): ArticlesPayload
   }
 
   input LoginInput {
