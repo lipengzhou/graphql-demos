@@ -21,6 +21,16 @@ class Users extends MongoDataSource {
   findById (userId) {
     return this.findOneById(userId)
   }
+
+  updateUser (userId, data) {
+    return this.model.findOneAndUpdate(
+      { _id: userId }, // 条件
+      data,
+      {
+        new: true // 默认返回更新之前的数据，配置为 true 返回更新之后的数据
+      }
+    )
+  }
 }
 
 module.exports = Users

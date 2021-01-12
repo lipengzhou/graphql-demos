@@ -76,6 +76,16 @@ const resolvers = {
       // 密码是否正确
       // 生成用户 token
       // 发送成功响应
+    },
+
+    async updateUser (parent, { user: userInput }, { user, dataSources }) {
+      if (userInput.password) {
+        userInput.password = md5(userInput.password)
+      }
+      const ret = await dataSources.users.updateUser(user._id, userInput)
+      return {
+        user: ret
+      }
     }
   }
 }

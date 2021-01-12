@@ -4,7 +4,8 @@ const { dbUri } = require('../config/config.default')
 // 连接 MongoDB 数据库
 mongoose.connect(dbUri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 })
 
 const db = mongoose.connection
