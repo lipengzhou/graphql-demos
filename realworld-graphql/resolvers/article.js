@@ -1,5 +1,16 @@
 module.exports = {
-  Query: {},
+  Query: {
+    async articles (parent, {}, { dataSources }) {
+      const [ articles, articlesCount ] = await Promise.all([
+        dataSources.articles.getArticles(),
+        dataSources.articles.getCount()
+      ])
+      return {
+        articles,
+        articlesCount
+      }
+    }
+  },
   Mutation: {
     async createArticle (parent, { article }, { dataSources, user }) {
       article.author = user._id

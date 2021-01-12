@@ -18,10 +18,16 @@ const typeDefs = gql`
     user: User
   }
 
+  type ArticlesPayload {
+    articles: [Article!]
+    articlesCount: Int!
+  }
+
   type Query {
     # foo: String @upper
     foo: String @auth @upper
     currentUser: User @auth
+    articles: ArticlesPayload
   }
 
   input LoginInput {
