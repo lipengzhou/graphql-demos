@@ -6,8 +6,14 @@ const md5 = require('../util/md5')
 const resolvers = {
   // 所有的 Query 都走这里
   Query: {
-    foo () {
+    foo (parent, args, context, info) {
+      console.log('foo resolve => ', context.user)
       return 'hello'
+    },
+    currentUser (parent, args, context, info) {
+      // 校验当前登录状态
+      // 具体的操作
+      return context.user
     }
   },
 
